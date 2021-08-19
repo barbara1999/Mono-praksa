@@ -1,4 +1,5 @@
-﻿using Projekt2.Models;
+﻿using Project.Model;
+using Project.Service;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace Projekt2.Controllers
 {
     
@@ -16,136 +18,53 @@ namespace Projekt2.Controllers
     [RoutePrefix("api")]
     public class PersonController : ApiController
     {
-
-        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
-
-
+        PersonService personService = new PersonService();
         [HttpGet]
         [Route("person")]
         public HttpResponseMessage GetAllPerson()
         {
-            
-            SqlCommand command = new SqlCommand("SELECT * FROM Person",connection);
+            List<Person> people = personService.GetAllPeople();
 
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            List<Person> people = new List<Person>();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                { 
-                    Person person =  new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
-                    people.Add(person);
-                }
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            
-            reader.Close();
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK, people);  
+            return Request.CreateResponse(HttpStatusCode.OK, people);
         }
-
-
 
         [HttpGet]
         [Route("person/{id:int:min(1)}")]
         public HttpResponseMessage GetPersonById([FromUri]int id)
         {
-            Person person = new Person();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
-            
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            Person person = personService.GetPersonById(id);
 
-            
-
-            if (reader.HasRows)
+            if (person.Id == 0)
             {
-                while (reader.Read())
-                {
-                    person = new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
-                    
-                }
-                
+                return Request.CreateResponse(HttpStatusCode.NotFound,"Person doesnt exist");
             }
 
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
-            }
-
-            reader.Close();
-            connection.Close();
             return Request.CreateResponse(HttpStatusCode.OK, person);
-            
-            
-
         }
         
         [HttpGet]
         [Route("person/{name:alpha}")]
-        public HttpResponseMessage GetPersonByName(string name)
+        public HttpResponseMessage GetPersonByName([FromUri] string name)
         {
-            Person person = new Person();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE Name='{name}' ", connection);
-            
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            List <Person> people = personService.GetPersonByName(name);
 
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    person = new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
-                }
-            }
-
-            else
-            {
-                
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
-                
-            }
-            reader.Close();
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK, person);
+            return Request.CreateResponse(HttpStatusCode.OK, people);
         }
 
         [HttpPost]
         [Route("person")]
         public HttpResponseMessage PostNewPerson([FromBody] Person person)
         {
-            Person mPerson = new Person();
-            mPerson.Id = person.Id;
-
-            mPerson.Name = person.Name;
-            mPerson.Surname = person.Surname;
-            mPerson.City = person.City;
-            
-            SqlCommand command = new SqlCommand($"INSERT INTO Person (ID, Name , Surname , City ) VALUES ({mPerson.Id},'{mPerson.Name}','{mPerson.Surname}',{mPerson.City})", connection);
-            
-            connection.Open();
-
-           
-            var response = Request.CreateResponse(HttpStatusCode.Created);
-            command.ExecuteNonQuery();
-            connection.Close();
-            return response;
+            personService.CreatePerson(person);
+            return Request.CreateResponse(HttpStatusCode.OK, "" + person.Name + " is created");
         }
 
         [HttpPut]
         [Route("person/{id}")]
-        public HttpResponseMessage UpdatePersonAddress(int id, [FromBody] Person person)
+        public HttpResponseMessage UpdatePerson(int id, [FromBody] Person person)
         {
             /* rjesiti kad budes znala
              SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Person",connection);
-
-
 
              dataAdapter.UpdateCommand = new SqlCommand($"UPDATE Person SET City={cityId} WHERE ID={id}", connection);
 
@@ -164,72 +83,29 @@ namespace Projekt2.Controllers
 
              */
 
-     
-            Person mPerson = new Person();
-            mPerson.Id = person.Id;
-            mPerson.Name = person.Name;
-            mPerson.Surname = person.Surname;
-            mPerson.City = person.City;
+            bool result=personService.UpdatePerson(id, person);
 
-          
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
-            connection.Open();
-
-            SqlDataReader reader = commandForID.ExecuteReader();
-            
-
-            if (!reader.HasRows)
+            if (result!=true)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
             }
-
-            reader.Close();
-
-            SqlCommand command = new SqlCommand($"UPDATE Person SET City={mPerson.City}, Name='{mPerson.Name}', Surname='{mPerson.Surname}' WHERE ID={id}", connection);
-            command.ExecuteNonQuery();
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK);
+           
+            return Request.CreateResponse(HttpStatusCode.OK,""+person.Name+" is updated");
 
         }
 
 
         [HttpDelete]
         [Route("person/{Id}")]
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage DeletePerson(int id)
         {
-          
-
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
-            SqlCommand command = new SqlCommand();
-            connection.Open();
-
-            SqlDataReader reader = commandForID.ExecuteReader();
-
-
-            if (reader.HasRows)
+            bool result = personService.DeletePerson(id);
+            if (result != true)
             {
-                while (reader.Read())
-                {
-
-                    command = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", connection);
-                }
-            }
-
-            else
-            {
-
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
-
             }
-
-            reader.Close();
-           
-            command.ExecuteNonQuery();
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, "Person with id "+id+" is deleted");
         }
-       
 
-        
     }
 }

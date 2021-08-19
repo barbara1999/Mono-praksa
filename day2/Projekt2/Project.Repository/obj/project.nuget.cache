@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "57+wH5cBGSej3xiXIsAeSB8fwRTQQcXUqTozmmAVQii+RFM/hZqOTRHmWnmZnUJS6EuRL2jMwDPOpw0IfpcmoQ==",
+  "dgSpecHash": "hTRCYC/6VZMVpZgJg+HnVk9dz3Y52WFM0jBHt+92IXn29JGhEYEhdJlNMOOewWjsw+SdnLubzLGOV59mjvUikg==",
   "success": true,
   "projectFilePath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\WIN10\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\WIN10\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

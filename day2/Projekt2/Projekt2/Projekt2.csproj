@@ -147,6 +147,16 @@
     <Folder Include="Data\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Model\Project.Model.csproj">
+      <Project>{550bbf79-a037-4a24-8c8e-43ff33335e26}</Project>
+      <Name>Project.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Service\Project.Service.csproj">
+      <Project>{94e1bc5b-1b99-4ea7-9b0d-9eb6ceeb2c06}</Project>
+      <Name>Project.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

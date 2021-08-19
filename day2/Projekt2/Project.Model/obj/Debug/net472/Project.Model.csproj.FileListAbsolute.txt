@@ -1,0 +1,8 @@
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\bin\Debug\net472\Project.Model.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\bin\Debug\net472\Project.Model.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.AssemblyInfoInputs.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.AssemblyInfo.cs
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model\obj\Debug\net472\Project.Model.pdb

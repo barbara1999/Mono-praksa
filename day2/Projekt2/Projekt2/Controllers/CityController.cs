@@ -1,4 +1,6 @@
-﻿using Projekt2.Models;
+﻿using Project.Model;
+using Project.Service;
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,33 +19,13 @@ namespace Projekt2.Controllers
     {
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
 
+        CityService cityService = new CityService();
+
         [HttpGet]
         [Route("city")]
         public HttpResponseMessage GetAllCity()
         {
-
-            SqlCommand command = new SqlCommand("SELECT * FROM City", connection);
-
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            List<City> cities = new List<City>();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    City city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
-                    cities.Add(city);
-                }
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            reader.Close();
-            connection.Close();
+            List<City> cities = cityService.GetAllCity();
             return Request.CreateResponse(HttpStatusCode.OK, cities);
         }
 
@@ -52,54 +34,25 @@ namespace Projekt2.Controllers
         [Route("city/{id:int:min(1)}")]
         public HttpResponseMessage GetCityById([FromUri] int id)
         {
-            City city = new City();
-            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
+            City city = cityService.GetCityById(id);
 
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-
-
-            if (reader.HasRows)
+            if (city.CityID == 0)
             {
-                while (reader.Read())
-                {
-                    city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
-                }
-
+                return Request.CreateResponse(HttpStatusCode.NotFound, "City doesnt exist");
             }
-
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "City does not exist");
-            }
-
-            reader.Close();
-            connection.Close();
             return Request.CreateResponse(HttpStatusCode.OK, city);
-
         }
 
         [HttpGet]
         [Route("city/{name:alpha}")]
         public HttpResponseMessage GetCityByName(string name)
         {
-            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE Name={name} ", connection);
-            City city = new City();
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            City city = cityService.GetCityByName(name);
 
-            if (reader.HasRows)
+            if (city.CityID == 0)
             {
-                city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                return Request.CreateResponse(HttpStatusCode.NotFound, "City doesnt exist");
             }
-
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
-            }
-            reader.Close();
-            connection.Close();
             return Request.CreateResponse(HttpStatusCode.OK, city);
         }
 
@@ -107,20 +60,38 @@ namespace Projekt2.Controllers
         [Route("city")]
         public HttpResponseMessage PostNewCity([FromBody] City city)
         {
-            City mCity = new City();
-            mCity.CityID = city.CityID;
 
-            mCity.Name = city.Name;
-            mCity.PostNumber = city.PostNumber;
+            cityService.CreateCity(city);
+            return Request.CreateResponse(HttpStatusCode.OK, "" + city.Name + " is created");
+        }
 
-            SqlCommand command = new SqlCommand($"INSERT INTO City (CityID, Name ,PostNumber) VALUES ({mCity.CityID},'{mCity.Name}',{mCity.PostNumber})", connection);
 
-            connection.Open();
+        [HttpPut]
+        [Route("city/{id}")]
+        public HttpResponseMessage UpdateCity(int id, [FromBody] City city)
+        {
+           
 
-            var response = Request.CreateResponse(HttpStatusCode.Created);
-            command.ExecuteNonQuery();
-            connection.Close();
-            return response;
+            bool result = cityService.UpdateCity(id, city);
+
+            if (result != true)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "City does not exist");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "" + city.Name + " is updated");
+        }
+
+
+        [HttpDelete]
+        [Route("city/{Id}")]
+        public HttpResponseMessage DeleteCity(int id)
+        {
+            bool result = cityService.DeleteCity(id);
+            if (result != true)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "City does not exist");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "City with id " + id + " is deleted");
         }
     }
 }

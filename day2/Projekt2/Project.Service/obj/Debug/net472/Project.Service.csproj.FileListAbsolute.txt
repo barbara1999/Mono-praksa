@@ -1,0 +1,13 @@
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Service.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Service.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Model.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Repository.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Model.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\bin\Debug\net472\Project.Repository.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.AssemblyInfoInputs.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.AssemblyInfo.cs
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.csproj.CopyComplete
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service\obj\Debug\net472\Project.Service.pdb

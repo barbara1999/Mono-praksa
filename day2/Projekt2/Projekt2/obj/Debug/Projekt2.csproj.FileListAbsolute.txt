@@ -168,3 +168,9 @@ C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\System.Web.Http.xml
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\System.Web.Http.WebHost.xml
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\obj\Debug\Projekt2.csproj.CopyComplete
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Model.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Service.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Model.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Service.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.pdb
