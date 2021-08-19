@@ -139,52 +139,94 @@ namespace Projekt2.Controllers
         }
 
         [HttpPut]
-        [Route("person/{Id}")]
-        public HttpResponseMessage UpdatePersonAddress(int id, [FromBody] int city)
+        [Route("person/{id}")]
+        public HttpResponseMessage UpdatePersonAddress(int id, [FromBody] Person person)
         {
-
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT City FROM Person", connection);
-
-            dataAdapter.UpdateCommand = new SqlCommand($"UPDATE Person SET City={city} WHERE ID={id}", connection);
-
-            dataAdapter.UpdateCommand.Parameters.Add("@city", SqlDbType.Int, 10, "City");
+            /* rjesiti kad budes znala
+             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Person",connection);
 
 
 
+             dataAdapter.UpdateCommand = new SqlCommand($"UPDATE Person SET City={cityId} WHERE ID={id}", connection);
 
+             dataAdapter.UpdateCommand.Parameters.Add("@cityID", SqlDbType.Int, 10, "City");
+             dataAdapter.UpdateCommand.Parameters.Add("@id", SqlDbType.Int, 10, "ID");
 
-            /*
-            SqlCommand command = new SqlCommand($"UPDATE Person SET City={city} WHERE ID={id}");
+             DataTable personTabel = new DataTable();
+             dataAdapter.Fill(personTabel);
+             dataAdapter.Update(personTabel);
+
+             DataRow row = personTabel.Rows[0];
+
+             Person person = new Person(id,row[1].ToString(),row[2].ToString(),cityId);
+
+             return Request.CreateResponse(HttpStatusCode.OK, person);
+
+             */
+
+     
+            Person mPerson = new Person();
+            mPerson.Id = person.Id;
+            mPerson.Name = person.Name;
+            mPerson.Surname = person.Surname;
+            mPerson.City = person.City;
+
+          
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
             connection.Open();
+
+            SqlDataReader reader = commandForID.ExecuteReader();
+            
+
+            if (!reader.HasRows)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
+            }
+
+            reader.Close();
+
+            SqlCommand command = new SqlCommand($"UPDATE Person SET City={mPerson.City}, Name='{mPerson.Name}', Surname='{mPerson.Surname}' WHERE ID={id}", connection);
             command.ExecuteNonQuery();
             connection.Close();
-            */
-            var response = new HttpResponseMessage();
-            response.Headers.Add("Message", "Address is successfuly updated");
-            return response;
-            
-           
+            return Request.CreateResponse(HttpStatusCode.OK);
+
         }
+
 
         [HttpDelete]
         [Route("person/{Id}")]
         public HttpResponseMessage Delete(int id)
         {
+          
+
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
+            SqlCommand command = new SqlCommand();
             connection.Open();
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            SqlDataReader reader = commandForID.ExecuteReader();
 
-            adapter.DeleteCommand = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", connection);
 
-            adapter.DeleteCommand.Parameters.Add("@id", SqlDbType.Int, 1, "ID");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
 
-            adapter.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
+                    command = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", connection);
+                }
+            }
 
-            HttpResponseMessage Msg = Request.CreateResponse(HttpStatusCode.OK, "Student deleted");
-            
+            else
+            {
+
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
+
+            }
+
+            reader.Close();
+           
+            command.ExecuteNonQuery();
             connection.Close();
-            return Msg;
-
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
        
 
