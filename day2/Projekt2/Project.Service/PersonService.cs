@@ -2,41 +2,43 @@
 using Project.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Project.Service
 {
     public class PersonService
     {
         PersonRepository personRepository = new PersonRepository();
-        public List<Person> GetAllPeople()
+        public async Task<List<Person>> GetAllPeopleAsync()
         {
-            return personRepository.GetAllPerson();
+            return await personRepository.GetAllPersonAsync();
             
         }
 
-        public Person GetPersonById(int id)
+        public async Task<Person> GetPersonByIdAsync(int id)
         {
-            return personRepository.GetPersonById(id);
+            return await personRepository.GetPersonByIdAsync(id);
         }
 
-        public List<Person> GetPersonByName(string name)
+        public async Task<List<Person>> GetPersonByNameAsync(string name)
         {
-            return personRepository.GetPersonByName(name);
+            return await personRepository.GetPersonByNameAsync(name);
         }
 
-        public void CreatePerson(Person person)
+        public async Task<bool> CreatePersonAsync(Person person)
         {
-            personRepository.CreatePerson(person);
+            return await personRepository.CreatePersonAsync(person);
+           
         }
 
-        public bool UpdatePerson(int id,Person person)
+        public async Task<bool> UpdatePersonAsync(int id,Person person)
         {
-            return personRepository.UpdatePerson(id, person);
+            return await personRepository.UpdatePersonAsync(id, person);
         }
 
-        public bool DeletePerson(int id)
+        public async Task<bool> DeletePersonAsync(int id)
         {
-            return personRepository.DeletePerson(id);
+            return await personRepository.DeletePersonAsync(id);
         }
     }
 }

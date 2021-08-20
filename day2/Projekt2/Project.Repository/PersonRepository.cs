@@ -6,27 +6,26 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Project.Model;
+using System.Threading.Tasks;
 
 namespace Project.Repository
 {
-   
     public class PersonRepository
-
 
     {
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
 
-        public List<Person> GetAllPerson()
+        public async Task<List<Person>> GetAllPersonAsync()
         {
 
             SqlCommand command = new SqlCommand("SELECT * FROM Person", connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-            List<Person> people = new List<Person>();
+            await connection.OpenAsync();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+            List<Person> people =   new List<Person>();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     Person person = new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
                     people.Add(person);
@@ -37,40 +36,40 @@ namespace Project.Repository
             return people;
         }
 
-        public Person GetPersonById(int id)
+        public async Task<Person> GetPersonByIdAsync(int id)
         {
             
             Person person = new Person();
             SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
 
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            await connection.OpenAsync();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     person = new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
                 }
-            }
+            }   
            
             reader.Close();
             connection.Close();
             return person;
         }
 
-        public List<Person> GetPersonByName(string name)
+        public async Task<List<Person>> GetPersonByNameAsync(string name)
         {
             List<Person> people = new List<Person>();
            
             SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE Name='{name}'", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     Person person = new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
                     people.Add(person);
@@ -82,59 +81,60 @@ namespace Project.Repository
             return people;
         }
 
-        public void CreatePerson(Person person)
+        public async Task<bool> CreatePersonAsync(Person person)
         {
-            Person mPerson = new Person();
-            mPerson.Id = person.Id;
-            mPerson.Name = person.Name;
-            mPerson.Surname = person.Surname;
-            mPerson.City = person.City;
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={person.Id} ", connection);
+            await connection.OpenAsync();
 
-            SqlCommand command = new SqlCommand($"INSERT INTO Person (ID, Name , Surname , City ) VALUES ({mPerson.Id},'{mPerson.Name}','{mPerson.Surname}',{mPerson.City})", connection);
+            SqlDataReader reader =await commandForID.ExecuteReaderAsync();
+            
+            if (person.Id <= 0)
+            {
+                return false;
+            }
 
-            connection.Open();
-            command.ExecuteNonQuery();
+            else if (reader.HasRows)
+            { 
+                return false;
+            }
+
+            reader.Close();
+            SqlCommand command = new SqlCommand($"INSERT INTO Person (ID, Name , Surname , City ) VALUES ({person.Id},'{person.Name}','{person.Surname}',{person.City})", connection);
+            
+            await command.ExecuteNonQueryAsync();
             connection.Close();
- 
+            return true;
         }
 
-        public bool UpdatePerson(int id,Person person)
+        public async Task<bool> UpdatePersonAsync(int id,Person person)
         {
-            Person mPerson = new Person();
-            mPerson.Id = person.Id;
-            mPerson.Name = person.Name;
-            mPerson.Surname = person.Surname;
-            mPerson.City = person.City;
-
             SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = commandForID.ExecuteReader();
+            SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
             if (!reader.HasRows)
             {
                 return false;
             }
-
-            reader.Close();
-
-            SqlCommand command = new SqlCommand($"UPDATE Person SET City={mPerson.City}, Name='{mPerson.Name}', Surname='{mPerson.Surname}' WHERE ID={id}", connection);
-            command.ExecuteNonQuery();
+           
+            SqlCommand command = new SqlCommand($"UPDATE Person SET City={person.City}, Name='{person.Name}', Surname='{person.Surname}' WHERE ID={id}", connection);
+            await command.ExecuteNonQueryAsync();
             connection.Close();
             return true;
         }
 
-        public bool DeletePerson(int id)
+        public async Task<bool> DeletePersonAsync(int id)
         {
             SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
             SqlCommand command = new SqlCommand();
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = commandForID.ExecuteReader();
+            SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
 
                     command = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", connection);
@@ -146,7 +146,7 @@ namespace Project.Repository
                 return false;
             }
             reader.Close();
-            command.ExecuteNonQuery();
+            await command.ExecuteNonQueryAsync();
             connection.Close();
             return true;
         }

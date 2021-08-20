@@ -13,18 +13,18 @@ namespace Project.Repository
     {
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
 
-        public List<City> GetCities()
+        public async Task<List<City>> GetCitiesAsync()
         {
             SqlCommand command = new SqlCommand("SELECT * FROM City", connection);
 
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            await connection.OpenAsync();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             List<City> cities = new List<City>();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     City city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                     cities.Add(city);
@@ -35,16 +35,17 @@ namespace Project.Repository
             return cities;
         }
 
-        public City GetCityById(int id)
+        public async Task<City> GetCityByIdAsync(int id)
         {
             City city = new City();
             SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
-            connection.Open();
+
+            await connection.OpenAsync();
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                 }
@@ -55,45 +56,63 @@ namespace Project.Repository
             return city;
         }
 
-        public City GetCityByName(string name)
+
+        
+        public async Task<City> GetCityByNameAsync(string name)
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE Name='{name}' ", connection);
             City city = new City();
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            await connection.OpenAsync();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                while (await reader.ReadAsync())
+                {
+                    city = new City(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                }
             }
+
+            reader.Close();
+            connection.Close();
             return city;
         }
 
-        public void CreateCity(City city)
+        //moram napraviti da se ne smije kreirati grad sa istim imenom i poštanskim brojem koji će postoji u bazi
+        public async Task<bool> CreateCityAsync(City city)
         {
-            City mCity = new City();
-            mCity.CityID = city.CityID;
-            mCity.Name = city.Name;
-            mCity.PostNumber = city.PostNumber;
-            SqlCommand command = new SqlCommand($"INSERT INTO City (CityID, Name ,PostNumber) VALUES ({mCity.CityID},'{mCity.Name}',{mCity.PostNumber})", connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={city.CityID} ", connection);
+            await connection.OpenAsync();
+
+            SqlDataReader reader = await commandForID.ExecuteReaderAsync();
+
+            if (city.CityID <= 0)
+            {
+                return false;
+            }
+
+            else if (reader.HasRows)
+            {
+                return false;
+            }
+
+            reader.Close();
+            SqlCommand command = new SqlCommand($"INSERT INTO City (CityID, Name ,PostNumber) VALUES ({city.CityID},'{city.Name}',{city.PostNumber})", connection);
+
+            await command.ExecuteNonQueryAsync();
             connection.Close();
+            return true;
         }
 
-        public bool UpdateCity(int id, City city)
+        public async Task<bool> UpdateCityAsync(int id, City city)
         {
-            City mCity = new City();
-            mCity.CityID = city.CityID;
-            mCity.Name = city.Name;
-            mCity.PostNumber = city.PostNumber;
-            
+ 
 
             SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = commandForID.ExecuteReader();
+            SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
             if (!reader.HasRows)
             {
@@ -102,23 +121,23 @@ namespace Project.Repository
 
             reader.Close();
 
-            SqlCommand command = new SqlCommand($"UPDATE City SET  Name='{mCity.Name}', PostNumber='{mCity.PostNumber}' WHERE CityID={id}", connection);
+            SqlCommand command = new SqlCommand($"UPDATE City SET  Name='{city.Name}', PostNumber='{city.PostNumber}' WHERE CityID={id}", connection);
             command.ExecuteNonQuery();
             connection.Close();
             return true;
         }
 
-        public bool DeleteCity(int id){
+        public async Task<bool> DeleteCityAsync(int id){
 
             SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
             SqlCommand command = new SqlCommand();
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = commandForID.ExecuteReader();
+            SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
 
                     command = new SqlCommand($"DELETE FROM City WHERE CityID={id}; ", connection);
@@ -130,7 +149,7 @@ namespace Project.Repository
                 return false;
             }
             reader.Close();
-            command.ExecuteNonQuery();
+            await command.ExecuteNonQueryAsync();
             connection.Close();
             return true;
 

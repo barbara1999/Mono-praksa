@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 
@@ -21,22 +22,22 @@ namespace Projekt2.Controllers
         PersonService personService = new PersonService();
         [HttpGet]
         [Route("person")]
-        public HttpResponseMessage GetAllPerson()
+        public async Task<HttpResponseMessage> GetAllPersonAsync()
         {
-            List<Person> people = personService.GetAllPeople();
+            List<Person> people = await personService.GetAllPeopleAsync();
 
             return Request.CreateResponse(HttpStatusCode.OK, people);
         }
 
         [HttpGet]
         [Route("person/{id:int:min(1)}")]
-        public HttpResponseMessage GetPersonById([FromUri]int id)
+        public async Task<HttpResponseMessage> GetPersonByIdAsync([FromUri]int id)
         {
-            Person person = personService.GetPersonById(id);
+            Person person =await personService.GetPersonByIdAsync(id);
 
-            if (person.Id == 0)
+            if (person.Name == null)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound,"Person doesnt exist");
+                return Request.CreateResponse(HttpStatusCode.NotFound,"Person doesn't exist");
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, person);
@@ -44,24 +45,34 @@ namespace Projekt2.Controllers
         
         [HttpGet]
         [Route("person/{name:alpha}")]
-        public HttpResponseMessage GetPersonByName([FromUri] string name)
+        public async Task<HttpResponseMessage> GetPersonByNameAsync([FromUri] string name)
         {
-            List <Person> people = personService.GetPersonByName(name);
+            List <Person> people = await personService.GetPersonByNameAsync(name);
 
             return Request.CreateResponse(HttpStatusCode.OK, people);
         }
 
         [HttpPost]
         [Route("person")]
-        public HttpResponseMessage PostNewPerson([FromBody] Person person)
+        public async Task<HttpResponseMessage> PostNewPerson([FromBody] Person person)
         {
-            personService.CreatePerson(person);
+           bool result= await personService.CreatePersonAsync(person);
+
+            if (person.Id <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Id must be bigger than 0");
+            }
+            else if (!result)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Person with that ID already exist");
+            }
+           
             return Request.CreateResponse(HttpStatusCode.OK, "" + person.Name + " is created");
         }
 
         [HttpPut]
         [Route("person/{id}")]
-        public HttpResponseMessage UpdatePerson(int id, [FromBody] Person person)
+        public async Task<HttpResponseMessage> UpdatePersonAsync(int id, [FromBody] Person person)
         {
             /* rjesiti kad budes znala
              SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Person",connection);
@@ -83,7 +94,7 @@ namespace Projekt2.Controllers
 
              */
 
-            bool result=personService.UpdatePerson(id, person);
+            bool result=await personService.UpdatePersonAsync(id, person);
 
             if (result!=true)
             {
@@ -97,9 +108,9 @@ namespace Projekt2.Controllers
 
         [HttpDelete]
         [Route("person/{Id}")]
-        public HttpResponseMessage DeletePerson(int id)
+        public async Task<HttpResponseMessage> DeletePersonAsync(int id)
         {
-            bool result = personService.DeletePerson(id);
+            bool result = await personService.DeletePersonAsync(id);
             if (result != true)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");
