@@ -26,9 +26,9 @@ namespace Projekt2.Controllers
         [Route("person")]
         public async Task<HttpResponseMessage> GetAllPersonAsync()
         {
-            List<IPerson> people = await personService.GetAllPeopleAsync();
+            List<IPerson> peoples = await personService.GetAllPeopleAsync();
 
-            return Request.CreateResponse(HttpStatusCode.OK, people);
+            return Request.CreateResponse(HttpStatusCode.OK, peoples);
         }
 
         [HttpGet]
