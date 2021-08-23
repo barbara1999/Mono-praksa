@@ -1,0 +1,200 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\Project.Service.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj",
+        "projectName": "Project.Model.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj",
+        "projectName": "Project.Model",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj",
+        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj",
+        "projectName": "Project.Repository.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\Project.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\Project.Repository.csproj",
+        "projectName": "Project.Repository",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\Project.Repository.csproj",
+        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj",
+        "projectName": "Project.Service.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\Project.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\Project.Service.csproj",
+        "projectName": "Project.Service",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\Project.Service.csproj",
+        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Model\\Project.Model.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\Project.Repository.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Repository\\Project.Repository.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

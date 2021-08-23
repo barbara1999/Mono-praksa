@@ -5,11 +5,36 @@
       "Project.Model/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "Project.Model.Common": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Project.Model.dll": {}
         },
         "runtime": {
           "bin/placeholder/Project.Model.dll": {}
+        }
+      },
+      "Project.Model.Common/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        }
+      },
+      "Project.Repository.Common/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Project.Model": "1.0.0",
+          "Project.Model.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Project.Repository.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Repository.Common.dll": {}
         }
       }
     }
@@ -19,11 +44,23 @@
       "type": "project",
       "path": "../Project.Model/Project.Model.csproj",
       "msbuildProject": "../Project.Model/Project.Model.csproj"
+    },
+    "Project.Model.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Model.Common/Project.Model.Common.csproj",
+      "msbuildProject": "../Project.Model.Common/Project.Model.Common.csproj"
+    },
+    "Project.Repository.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Repository.Common/Project.Repository.Common.csproj",
+      "msbuildProject": "../Project.Repository.Common/Project.Repository.Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
-      "Project.Model >= 1.0.0"
+      "Project.Model >= 1.0.0",
+      "Project.Model.Common >= 1.0.0",
+      "Project.Repository.Common >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -53,8 +90,14 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
+            "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+              "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+            },
             "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj": {
               "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj"
+            },
+            "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj": {
+              "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj"
             }
           }
         }

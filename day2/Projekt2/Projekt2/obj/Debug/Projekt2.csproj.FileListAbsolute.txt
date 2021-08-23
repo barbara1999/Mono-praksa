@@ -174,3 +174,9 @@ C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.dll
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Model.pdb
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Service.pdb
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Model.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Service.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Model.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Service.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Projekt2\bin\Project.Repository.Common.pdb

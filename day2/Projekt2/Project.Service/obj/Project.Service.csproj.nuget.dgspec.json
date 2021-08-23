@@ -4,6 +4,16 @@
     "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service\\Project.Service.csproj": {}
   },
   "projects": {
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj",
+        "projectName": "Project.Model.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -27,7 +37,11 @@
         "frameworks": {
           "net472": {
             "targetAlias": "net472",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -41,6 +55,28 @@
           "targetAlias": "net472",
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj",
+        "projectName": "Project.Repository.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
       }
     },
     "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj": {
@@ -67,8 +103,14 @@
           "net472": {
             "targetAlias": "net472",
             "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              },
               "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj": {
                 "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model\\Project.Model.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository.Common\\Project.Repository.Common.csproj"
               }
             }
           }
@@ -84,6 +126,25 @@
           "targetAlias": "net472",
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj",
+        "projectName": "Project.Service.Common",
+        "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
       }
     },
     "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service\\Project.Service.csproj": {
@@ -115,6 +176,9 @@
               },
               "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj": {
                 "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj"
+              },
+              "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj": {
+                "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj"
               }
             }
           }

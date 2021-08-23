@@ -1,0 +1,9 @@
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\bin\Debug\Project.Service.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\bin\Debug\Project.Service.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\bin\Debug\Project.Model.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\bin\Debug\Project.Model.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\obj\Debug\Project.Service.Common.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\obj\Debug\Project.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\obj\Debug\Project.Service.Common.csproj.CopyComplete
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\obj\Debug\Project.Service.Common.dll
+C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Service.Common\obj\Debug\Project.Service.Common.pdb

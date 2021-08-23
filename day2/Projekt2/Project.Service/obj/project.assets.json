@@ -5,6 +5,9 @@
       "Project.Model/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "Project.Model.Common": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Project.Model.dll": {}
         },
@@ -12,17 +15,53 @@
           "bin/placeholder/Project.Model.dll": {}
         }
       },
+      "Project.Model.Common/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        }
+      },
       "Project.Repository/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
-          "Project.Model": "1.0.0"
+          "Project.Model": "1.0.0",
+          "Project.Model.Common": "1.0.0",
+          "Project.Repository.Common": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Project.Repository.dll": {}
         },
         "runtime": {
           "bin/placeholder/Project.Repository.dll": {}
+        }
+      },
+      "Project.Repository.Common/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Project.Model": "1.0.0",
+          "Project.Model.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Project.Repository.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Repository.Common.dll": {}
+        }
+      },
+      "Project.Service.Common/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Project.Model.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Project.Service.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Service.Common.dll": {}
         }
       }
     }
@@ -33,16 +72,32 @@
       "path": "../Project.Model/Project.Model.csproj",
       "msbuildProject": "../Project.Model/Project.Model.csproj"
     },
+    "Project.Model.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Model.Common/Project.Model.Common.csproj",
+      "msbuildProject": "../Project.Model.Common/Project.Model.Common.csproj"
+    },
     "Project.Repository/1.0.0": {
       "type": "project",
       "path": "../Project.Repository/Project.Repository.csproj",
       "msbuildProject": "../Project.Repository/Project.Repository.csproj"
+    },
+    "Project.Repository.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Repository.Common/Project.Repository.Common.csproj",
+      "msbuildProject": "../Project.Repository.Common/Project.Repository.Common.csproj"
+    },
+    "Project.Service.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Service.Common/Project.Service.Common.csproj",
+      "msbuildProject": "../Project.Service.Common/Project.Service.Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "Project.Model >= 1.0.0",
-      "Project.Repository >= 1.0.0"
+      "Project.Repository >= 1.0.0",
+      "Project.Service.Common >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -77,6 +132,9 @@
             },
             "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj": {
               "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Repository\\Project.Repository.csproj"
+            },
+            "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj": {
+              "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Service.Common\\Project.Service.Common.csproj"
             }
           }
         }

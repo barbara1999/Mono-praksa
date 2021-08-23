@@ -1,11 +1,29 @@
 {
   "version": 3,
   "targets": {
-    ".NETFramework,Version=v4.7.2": {}
+    ".NETFramework,Version=v4.7.2": {
+      "Project.Model.Common/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project.Model.Common.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Project.Model.Common/1.0.0": {
+      "type": "project",
+      "path": "../Project.Model.Common/Project.Model.Common.csproj",
+      "msbuildProject": "../Project.Model.Common/Project.Model.Common.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.7.2": []
+    ".NETFramework,Version=v4.7.2": [
+      "Project.Model.Common >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\WIN10\\.nuget\\packages\\": {}
@@ -33,7 +51,11 @@
       "frameworks": {
         "net472": {
           "targetAlias": "net472",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj": {
+              "projectPath": "C:\\Users\\WIN10\\Desktop\\praksa\\day2\\Projekt2\\Project.Model.Common\\Project.Model.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
