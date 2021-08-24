@@ -13,13 +13,17 @@ namespace Project.Repository
 {
     public class CityRepository : ICityRepository
     {
-        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
+        SqlConnection _connection;
+        public CityRepository(SqlConnection connection)
+        {
+            _connection = connection;
+        }
 
         public async Task<List<ICity>> GetCitiesAsync()
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM City", connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM City", _connection);
 
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
             List<ICity> cities = new List<ICity>();
@@ -33,16 +37,16 @@ namespace Project.Repository
                 }
             }
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return cities;
         }
 
         public async Task<ICity> GetCityByIdAsync(int id)
         {
             ICity city = new City();
-            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", _connection);
 
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
@@ -54,7 +58,7 @@ namespace Project.Repository
             }
 
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return city;
         }
 
@@ -62,9 +66,9 @@ namespace Project.Repository
 
         public async Task<ICity> GetCityByNameAsync(string name)
         {
-            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE Name='{name}' ", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM City WHERE Name='{name}' ", _connection);
             ICity city = new City();
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
@@ -76,7 +80,7 @@ namespace Project.Repository
             }
 
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return city;
         }
 
@@ -84,8 +88,8 @@ namespace Project.Repository
         public async Task<bool> CreateCityAsync(ICity city)
         {
 
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={city.CityID} ", connection);
-            await connection.OpenAsync();
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={city.CityID} ", _connection);
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -100,10 +104,10 @@ namespace Project.Repository
             }
 
             reader.Close();
-            SqlCommand command = new SqlCommand($"INSERT INTO City (CityID, Name ,PostNumber) VALUES ({city.CityID},'{city.Name}',{city.PostNumber})", connection);
+            SqlCommand command = new SqlCommand($"INSERT INTO City (CityID, Name ,PostNumber) VALUES ({city.CityID},'{city.Name}',{city.PostNumber})", _connection);
 
             await command.ExecuteNonQueryAsync();
-            connection.Close();
+            _connection.Close();
             return true;
         }
 
@@ -111,8 +115,8 @@ namespace Project.Repository
         {
 
 
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
-            await connection.OpenAsync();
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", _connection);
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -123,18 +127,18 @@ namespace Project.Repository
 
             reader.Close();
 
-            SqlCommand command = new SqlCommand($"UPDATE City SET  Name='{city.Name}', PostNumber='{city.PostNumber}' WHERE CityID={id}", connection);
+            SqlCommand command = new SqlCommand($"UPDATE City SET  Name='{city.Name}', PostNumber='{city.PostNumber}' WHERE CityID={id}", _connection);
             command.ExecuteNonQuery();
-            connection.Close();
+            _connection.Close();
             return true;
         }
 
         public async Task<bool> DeleteCityAsync(int id)
         {
 
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", connection);
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM City WHERE CityID={id} ", _connection);
             SqlCommand command = new SqlCommand();
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -143,7 +147,7 @@ namespace Project.Repository
                 while (await reader.ReadAsync())
                 {
 
-                    command = new SqlCommand($"DELETE FROM City WHERE CityID={id}; ", connection);
+                    command = new SqlCommand($"DELETE FROM City WHERE CityID={id}; ", _connection);
                 }
             }
 
@@ -153,7 +157,7 @@ namespace Project.Repository
             }
             reader.Close();
             await command.ExecuteNonQueryAsync();
-            connection.Close();
+            _connection.Close();
             return true;
 
         }

@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "tHC5IfBJKqfqDXMhjAtwJHNDHJ84AIVoggT48XlEhzdJaBCjj6A8QPpq3UAl9EKVHtIGOXXERKDEUiKhtGx84Q==",
+  "dgSpecHash": "l6YVREAexAD+UNr0hkrKYJP9nzRuY57oBB+BS8db8jjTQvbogFyn1/4z9jgylqfHAw0ZOUvy4P5BhgrNYSStig==",
   "success": true,
   "projectFilePath": "C:\\Users\\WIN10\\Desktop\\praksa\\day6\\Projekt2\\Project.Service\\Project.Service.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\WIN10\\.nuget\\packages\\autofac\\6.2.0\\autofac.6.2.0.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+    "C:\\Users\\WIN10\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.2\\system.threading.tasks.extensions.4.5.2.nupkg.sha512"
+  ],
   "logs": []
 }

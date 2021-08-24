@@ -15,13 +15,17 @@ namespace Project.Repository
     public class PersonRepository : IPersonRepository
 
     {
-        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["bascic"].ConnectionString);
+        SqlConnection _connection;
+        public PersonRepository(SqlConnection connection)
+        {
+            _connection = connection;
+        }
 
         public async Task<List<IPerson>> GetAllPersonAsync()
         {
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Person", connection);
-            await connection.OpenAsync();
+            SqlCommand command = new SqlCommand("SELECT * FROM Person", _connection);
+            await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
             List<IPerson> people = new List<IPerson>();
 
@@ -34,7 +38,7 @@ namespace Project.Repository
                 }
             }
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return people;
         }
 
@@ -42,9 +46,9 @@ namespace Project.Repository
         {
 
             Person person = new Person();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", _connection);
 
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
@@ -56,7 +60,7 @@ namespace Project.Repository
             }
 
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return person;
         }
 
@@ -64,9 +68,9 @@ namespace Project.Repository
         {
             List<IPerson> people = new List<IPerson>();
 
-            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE Name='{name}'", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Person WHERE Name='{name}'", _connection);
 
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
@@ -79,14 +83,14 @@ namespace Project.Repository
             }
 
             reader.Close();
-            connection.Close();
+            _connection.Close();
             return people;
         }
 
         public async Task<bool> CreatePersonAsync(IPerson person)
         {
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={person.Id} ", connection);
-            await connection.OpenAsync();
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={person.Id} ", _connection);
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -101,17 +105,17 @@ namespace Project.Repository
             }
 
             reader.Close();
-            SqlCommand command = new SqlCommand($"INSERT INTO Person (ID, Name , Surname , City ) VALUES ({person.Id},'{person.Name}','{person.Surname}',{person.City})", connection);
+            SqlCommand command = new SqlCommand($"INSERT INTO Person (ID, Name , Surname , City ) VALUES ({person.Id},'{person.Name}','{person.Surname}',{person.City})", _connection);
 
             await command.ExecuteNonQueryAsync();
-            connection.Close();
+            _connection.Close();
             return true;
         }
 
         public async Task<bool> UpdatePersonAsync(int id, IPerson person)
         {
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
-            await connection.OpenAsync();
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", _connection);
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -120,17 +124,17 @@ namespace Project.Repository
                 return false;
             }
 
-            SqlCommand command = new SqlCommand($"UPDATE Person SET City={person.City}, Name='{person.Name}', Surname='{person.Surname}' WHERE ID={id}", connection);
+            SqlCommand command = new SqlCommand($"UPDATE Person SET City={person.City}, Name='{person.Name}', Surname='{person.Surname}' WHERE ID={id}", _connection);
             await command.ExecuteNonQueryAsync();
-            connection.Close();
+            _connection.Close();
             return true;
         }
 
         public async Task<bool> DeletePersonAsync(int id)
         {
-            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", connection);
+            SqlCommand commandForID = new SqlCommand($"SELECT * FROM Person WHERE ID={id} ", _connection);
             SqlCommand command = new SqlCommand();
-            await connection.OpenAsync();
+            await _connection.OpenAsync();
 
             SqlDataReader reader = await commandForID.ExecuteReaderAsync();
 
@@ -139,7 +143,7 @@ namespace Project.Repository
                 while (await reader.ReadAsync())
                 {
 
-                    command = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", connection);
+                    command = new SqlCommand($"DELETE FROM Person WHERE ID={id}; ", _connection);
                 }
             }
 
@@ -149,7 +153,7 @@ namespace Project.Repository
             }
             reader.Close();
             await command.ExecuteNonQueryAsync();
-            connection.Close();
+            _connection.Close();
             return true;
         }
     }

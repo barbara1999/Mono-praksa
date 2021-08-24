@@ -9,3 +9,14 @@ C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Repository.Common\obj\Debug\
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.csproj.CopyComplete
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.dll
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Repository.Common.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Repository.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Model.Common.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Model.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Model.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\bin\Debug\Project.Model.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.csproj.CopyComplete
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Repository.Common\obj\Debug\Project.Repository.Common.pdb

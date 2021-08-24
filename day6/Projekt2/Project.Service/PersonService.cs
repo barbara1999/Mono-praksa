@@ -11,37 +11,42 @@ namespace Project.Service
 {
     public class PersonService : IPersonService
     {
-        IPersonRepository personRepository = new PersonRepository();
+        IPersonRepository _personRepository;
+
+        public PersonService(IPersonRepository personRepository)
+        {
+            _personRepository = personRepository;
+        }
         public async Task<List<IPerson>> GetAllPeopleAsync()
         {
-            return await personRepository.GetAllPersonAsync();
+            return await _personRepository.GetAllPersonAsync();
 
         }
 
         public async Task<IPerson> GetPersonByIdAsync(int id)
         {
-            return await personRepository.GetPersonByIdAsync(id);
+            return await _personRepository.GetPersonByIdAsync(id);
         }
 
         public async Task<List<IPerson>> GetPersonByNameAsync(string name)
         {
-            return await personRepository.GetPersonByNameAsync(name);
+            return await _personRepository.GetPersonByNameAsync(name);
         }
 
         public async Task<bool> CreatePersonAsync(IPerson person)
         {
-            return await personRepository.CreatePersonAsync(person);
+            return await _personRepository.CreatePersonAsync(person);
 
         }
 
         public async Task<bool> UpdatePersonAsync(int id, IPerson person)
         {
-            return await personRepository.UpdatePersonAsync(id, person);
+            return await _personRepository.UpdatePersonAsync(id, person);
         }
 
         public async Task<bool> DeletePersonAsync(int id)
         {
-            return await personRepository.DeletePersonAsync(id);
+            return await _personRepository.DeletePersonAsync(id);
         }
     }
 }

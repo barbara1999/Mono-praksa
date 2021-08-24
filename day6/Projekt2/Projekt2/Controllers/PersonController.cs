@@ -21,12 +21,18 @@ namespace Projekt2.Controllers
     [RoutePrefix("api")]
     public class PersonController : ApiController
     {
-        IPersonService personService = new PersonService();
+        IPersonService _personService;
+
+        public PersonController(IPersonService personService)
+        {
+            _personService = personService;
+        }
+
         [HttpGet]
         [Route("person")]
         public async Task<HttpResponseMessage> GetAllPersonAsync()
         {
-            List<IPerson> peoples = await personService.GetAllPeopleAsync();
+            List<IPerson> peoples = await _personService.GetAllPeopleAsync();
 
             return Request.CreateResponse(HttpStatusCode.OK, peoples);
         }
@@ -35,7 +41,7 @@ namespace Projekt2.Controllers
         [Route("person/{id:int:min(1)}")]
         public async Task<HttpResponseMessage> GetPersonByIdAsync([FromUri]int id)
         {
-            IPerson person =await personService.GetPersonByIdAsync(id);
+            IPerson person =await _personService.GetPersonByIdAsync(id);
 
             if (person.Name == null)
             {
@@ -49,7 +55,7 @@ namespace Projekt2.Controllers
         [Route("person/{name:alpha}")]
         public async Task<HttpResponseMessage> GetPersonByNameAsync([FromUri] string name)
         {
-            List <IPerson> people = await personService.GetPersonByNameAsync(name);
+            List <IPerson> people = await _personService.GetPersonByNameAsync(name);
 
             return Request.CreateResponse(HttpStatusCode.OK, people);
         }
@@ -58,7 +64,7 @@ namespace Projekt2.Controllers
         [Route("person")]
         public async Task<HttpResponseMessage> PostNewPerson([FromBody] IPerson person)
         {
-           bool result= await personService.CreatePersonAsync(person);
+           bool result= await _personService.CreatePersonAsync(person);
 
             if (person.Id <= 0)
             {
@@ -96,7 +102,7 @@ namespace Projekt2.Controllers
 
              */
 
-            bool result=await personService.UpdatePersonAsync(id, person);
+            bool result=await _personService.UpdatePersonAsync(id, person);
 
             if (result!=true)
             {
@@ -112,7 +118,7 @@ namespace Projekt2.Controllers
         [Route("person/{Id}")]
         public async Task<HttpResponseMessage> DeletePersonAsync(int id)
         {
-            bool result = await personService.DeletePersonAsync(id);
+            bool result = await _personService.DeletePersonAsync(id);
             if (result != true)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Person does not exist");

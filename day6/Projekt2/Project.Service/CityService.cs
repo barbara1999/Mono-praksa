@@ -13,36 +13,41 @@ namespace Project.Service
 {
     public class CityService : ICityService
     {
-        ICityRepository cityRepository = new CityRepository();
+        ICityRepository _cityRepository;
+
+        public CityService(ICityRepository cityRepository)
+        {
+            _cityRepository = cityRepository;
+        }
 
         public async Task<List<ICity>> GetAllCityAsync()
         {
-            return await cityRepository.GetCitiesAsync();
+            return await _cityRepository.GetCitiesAsync();
         }
 
         public async Task<ICity> GetCityByIdAsync(int id)
         {
-            return await cityRepository.GetCityByIdAsync(id);
+            return await _cityRepository.GetCityByIdAsync(id);
         }
 
         public async Task<ICity> GetCityByNameAsync(string name)
         {
-            return await cityRepository.GetCityByNameAsync(name);
+            return await _cityRepository.GetCityByNameAsync(name);
         }
 
         public async Task<bool> CreateCityAsync(ICity city)
         {
-            return await cityRepository.CreateCityAsync(city);
+            return await _cityRepository.CreateCityAsync(city);
         }
 
         public async Task<bool> UpdateCityAsync(int id, ICity city)
         {
-            return await cityRepository.UpdateCityAsync(id, city);
+            return await _cityRepository.UpdateCityAsync(id, city);
         }
 
         public async Task<bool> DeleteCityAsync(int id)
         {
-            return await cityRepository.DeleteCityAsync(id);
+            return await _cityRepository.DeleteCityAsync(id);
         }
     }
 }

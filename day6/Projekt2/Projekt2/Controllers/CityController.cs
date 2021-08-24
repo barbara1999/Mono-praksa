@@ -16,16 +16,22 @@ namespace Projekt2.Controllers
 {
     [RoutePrefix("api")]
 
-
+    
     public class CityController : ApiController
     {
-        ICityService cityService = new CityService();
+
+        ICityService _cityService;
+
+        public CityController(ICityService cityService)
+        {
+            _cityService = cityService;
+        }
 
         [HttpGet]
         [Route("city")]
         public async Task<HttpResponseMessage> GetAllCityAsync()
         {
-            List<ICity> cities =await  cityService.GetAllCityAsync();
+            List<ICity> cities =await  _cityService.GetAllCityAsync();
             return Request.CreateResponse(HttpStatusCode.OK, cities);
         }
 
@@ -33,7 +39,7 @@ namespace Projekt2.Controllers
         [Route("city/{id:int:min(1)}")]
         public async Task<HttpResponseMessage> GetCityByIdAsync([FromUri] int id)
         {
-            ICity city = await cityService.GetCityByIdAsync(id);
+            ICity city = await _cityService.GetCityByIdAsync(id);
 
             if (city.Name == null)
             {
@@ -46,7 +52,7 @@ namespace Projekt2.Controllers
         [Route("city/{name:alpha}")]
         public async Task<HttpResponseMessage> GetCityByNameAsync(string name)
         {
-            ICity city = await cityService.GetCityByNameAsync(name);
+            ICity city = await _cityService.GetCityByNameAsync(name);
 
             if (city.CityID == 0)
             {
@@ -59,7 +65,7 @@ namespace Projekt2.Controllers
         [Route("city")]
         public async Task<HttpResponseMessage> PostNewCity([FromBody] ICity city)
         { 
-            bool result =await cityService.CreateCityAsync(city);
+            bool result =await _cityService.CreateCityAsync(city);
 
             if (city.CityID <= 0)
             {
@@ -77,7 +83,7 @@ namespace Projekt2.Controllers
         [Route("city/{id}")]
         public async Task<HttpResponseMessage> UpdateCityAsync(int id, [FromBody] ICity city)
         {
-            bool result = await cityService.UpdateCityAsync(id, city);
+            bool result = await _cityService.UpdateCityAsync(id, city);
 
             if (result != true)
             {
@@ -90,7 +96,7 @@ namespace Projekt2.Controllers
         [Route("city/{Id}")]
         public async Task<HttpResponseMessage> DeleteCityAsync(int id)
         {
-            bool result = await cityService.DeleteCityAsync(id);
+            bool result = await _cityService.DeleteCityAsync(id);
             if (result != true)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "City does not exist");
