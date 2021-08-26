@@ -1,0 +1,8 @@
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\bin\Debug\net472\Project.Common.dll
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\bin\Debug\net472\Project.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.AssemblyInfoInputs.cache
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.AssemblyInfo.cs
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.dll
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projcet.Common\obj\Debug\net472\Project.Common.pdb
