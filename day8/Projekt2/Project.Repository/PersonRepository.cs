@@ -25,7 +25,7 @@ namespace Project.Repository
         public async Task<List<IPerson>> GetAllPersonAsync(Sorter sorter, Pager pager, PersonFilter filter)
         {
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Person"+sorter.SQLMethod()+filter.SQlMethod(), _connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM Person"+sorter.SQLMethod()+filter.SQlMethod()+pager.getSQL(), _connection);
             await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
             List<IPerson> people = new List<IPerson>();
