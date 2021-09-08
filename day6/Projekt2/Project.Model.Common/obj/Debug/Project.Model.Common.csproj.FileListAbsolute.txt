@@ -4,3 +4,9 @@ C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model.Common\obj\Debug\Proje
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.csproj.CoreCompileInputs.cache
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.dll
 C:\Users\WIN10\Desktop\praksa\day2\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\bin\Debug\Project.Model.Common.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\bin\Debug\Project.Model.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.csprojAssemblyReference.cache
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.csproj.CoreCompileInputs.cache
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.dll
+C:\Users\WIN10\Desktop\praksa\day6\Projekt2\Project.Model.Common\obj\Debug\Project.Model.Common.pdb

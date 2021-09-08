@@ -31,7 +31,7 @@ namespace Projekt2.Controllers
         [Route("city")]
         public async Task<HttpResponseMessage> GetAllCityAsync()
         {
-            List<ICity> cities =await  _cityService.GetAllCityAsync();
+            List<CityRest> cities = (await _cityService.GetAllCityAsync()).ConvertAll(ConvertFromDomainToRest);
             return Request.CreateResponse(HttpStatusCode.OK, cities);
         }
 
@@ -39,7 +39,7 @@ namespace Projekt2.Controllers
         [Route("city/{id:int:min(1)}")]
         public async Task<HttpResponseMessage> GetCityByIdAsync([FromUri] int id)
         {
-            ICity city = await _cityService.GetCityByIdAsync(id);
+            CityRest city = ConvertFromDomainToRest(await _cityService.GetCityByIdAsync(id));
 
             if (city.Name == null)
             {
@@ -52,7 +52,7 @@ namespace Projekt2.Controllers
         [Route("city/{name:alpha}")]
         public async Task<HttpResponseMessage> GetCityByNameAsync(string name)
         {
-            ICity city = await _cityService.GetCityByNameAsync(name);
+            CityRest city = ConvertFromDomainToRest(await _cityService.GetCityByNameAsync(name));
 
             if (city.CityID == 0)
             {
@@ -63,9 +63,11 @@ namespace Projekt2.Controllers
 
         [HttpPost]
         [Route("city")]
-        public async Task<HttpResponseMessage> PostNewCity([FromBody] ICity city)
-        { 
-            bool result =await _cityService.CreateCityAsync(city);
+        public async Task<HttpResponseMessage> PostNewCity([FromBody] CityRest city)
+        {
+            ICity cityDomain = ConvertFromRestToDomain(city);
+
+            bool result = await _cityService.CreateCityAsync(cityDomain);
 
             if (city.CityID <= 0)
             {
@@ -81,9 +83,10 @@ namespace Projekt2.Controllers
 
         [HttpPut]
         [Route("city/{id}")]
-        public async Task<HttpResponseMessage> UpdateCityAsync(int id, [FromBody] ICity city)
+        public async Task<HttpResponseMessage> UpdateCityAsync(int id, [FromBody] CityRest city)
         {
-            bool result = await _cityService.UpdateCityAsync(id, city);
+            ICity cityDomain = ConvertFromRestToDomain(city);
+            bool result = await _cityService.UpdateCityAsync(id, cityDomain);
 
             if (result != true)
             {
@@ -102,6 +105,35 @@ namespace Projekt2.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "City does not exist");
             }
             return Request.CreateResponse(HttpStatusCode.OK, "City with id " + id + " is deleted");
+        }
+        public class CityRest
+        {
+            public int CityID { get; set; }
+            public string Name { get; set; }
+            public int PostNumber { get; set; }
+
+            public CityRest() { }
+
+            public CityRest(int cityID, string name, int postNumber)
+            {
+                CityID = cityID;
+                Name = name;
+                PostNumber = postNumber;
+            }
+        }
+
+        public CityRest ConvertFromDomainToRest(ICity domainCity)
+        {
+            CityRest cityRest = new CityRest(domainCity.CityID,domainCity.Name,domainCity.PostNumber);
+            
+            return cityRest;
+        }
+
+        public City ConvertFromRestToDomain(CityRest restCity)
+        {
+            City cityDomain = new City(restCity.CityID, restCity.Name, restCity.PostNumber);
+         
+            return cityDomain;
         }
     }
 }

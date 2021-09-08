@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./Form.css";
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -37,8 +37,8 @@ class Form extends Component {
   render() {
     const { username, comments, topic } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
+      <form onSubmit={this.handleSubmit} class="form-container">
+        <div class="item">
           <label htmlFor="">Username</label>
           <input
             type="text"
@@ -46,7 +46,7 @@ class Form extends Component {
             onChange={this.handleUserNameChange}
           />
         </div>
-        <div>
+        <div class="item">
           <label htmlFor="">Comments</label>
           <textarea
             value={comments}
@@ -57,7 +57,7 @@ class Form extends Component {
             rows="3"
           ></textarea>
         </div>
-        <div>
+        <div class="item">
           <label htmlFor="">Topic</label>
           <select value={topic} onChange={this.handleTopic} name="" id="">
             <option value="react">React</option>
@@ -65,7 +65,9 @@ class Form extends Component {
             <option value="vue">Vue</option>
           </select>
         </div>
-        <button type="submit">Submit</button>
+        <button class="btn-submit" type="submit">
+          Submit
+        </button>
       </form>
     );
   }
