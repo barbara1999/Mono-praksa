@@ -16,6 +16,7 @@ class App extends Component {
   state = {
     persons: [],
     newPersonModal: false,
+    editPersonModal: false,
     newPersonData: {
       id: "",
       name: "",
@@ -31,16 +32,19 @@ class App extends Component {
   };
 
   componentWillMount() {
-    axios.get("https://localhost:44359/api/person").then((response) => {
-      this.setState({
-        persons: response.data,
-      });
-    });
+    this._refreshPerson();
   }
 
   toggleNewPersonModal() {
     this.setState({
       newPersonModal: !this.state.newPersonModal,
+    });
+    //this.state.newPersonModal = true;
+  }
+
+  toggleEditPersonModal() {
+    this.setState({
+      editPersonModal: !this.state.editPersonModal,
     });
     //this.state.newPersonModal = true;
   }
@@ -54,6 +58,7 @@ class App extends Component {
         this.setState({
           persons,
           newPersonModal: false,
+          editPersonModal: false,
           newPersonData: {
             id: "",
             name: "",
@@ -61,6 +66,49 @@ class App extends Component {
             city: "",
           },
         });
+      });
+  }
+
+  editPerson(id, name, surname, city) {
+    this.setState({
+      editPersonData: { id, name, surname, city },
+      editPersonModal: !this.state.editPersonModal,
+    });
+  }
+
+  updatePerson() {
+    let { name, surname, city } = this.state.editPersonData;
+    axios
+      .put(
+        "https://localhost:44359/api/person/" + this.state.editPersonData.id,
+        {
+          name,
+          surname,
+          city,
+        }
+      )
+      .then((response) => {
+        this._refreshPerson();
+        this.setState({
+          editPersonModal: false,
+          editPersonData: { id: "", name: "", surname: "", city: "" },
+        });
+      });
+  }
+
+  _refreshPerson() {
+    axios.get("https://localhost:44359/api/person").then((response) => {
+      this.setState({
+        persons: response.data,
+      });
+    });
+  }
+
+  deletePerson(id) {
+    axios
+      .delete("https://localhost:44359/api/person/" + id)
+      .then((response) => {
+        this._refreshPerson();
       });
   }
 
@@ -78,15 +126,20 @@ class App extends Component {
               size="sm"
               onClick={this.editPerson.bind(
                 this,
-                person.id,
-                person.name,
-                person.surname,
-                person.city
+                person.Id,
+                person.Name,
+                person.Surname,
+                person.City
               )}
             >
               Edit
             </Button>
-            <Button color="danger" size="sm" className="pl-2">
+            <Button
+              color="danger"
+              size="sm"
+              className="pl-2"
+              onClick={this.deletePerson.bind(this, person.Id)}
+            >
               Delete
             </Button>
           </td>
@@ -172,6 +225,80 @@ class App extends Component {
             <Button
               color="secondary"
               onClick={this.toggleNewPersonModal.bind(this)}
+            >
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.editPersonModal}
+          toggle={this.toggleEditPersonModal.bind(this)}
+        >
+          <ModalHeader toggle={this.toggleEditPersonModal.bind(this)}>
+            Edit person
+          </ModalHeader>
+          <ModalBody>
+            <FormGroup>
+              <Label for="id">Id</Label>
+              <Input
+                type="number"
+                id="id"
+                value={this.state.editPersonData.id}
+                onChange={(e) => {
+                  let { editPersonData } = this.state;
+                  editPersonData.id = e.target.value;
+                  this.setState({ editPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                value={this.state.editPersonData.name}
+                onChange={(e) => {
+                  let { editPersonData } = this.state;
+                  editPersonData.name = e.target.value;
+                  this.setState({ editPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="surname">Surname</Label>
+              <Input
+                type="text"
+                id="surname"
+                value={this.state.editPersonData.surname}
+                onChange={(e) => {
+                  let { editPersonData } = this.state;
+                  editPersonData.surname = e.target.value;
+                  this.setState({ editPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="city">Post Number</Label>
+              <Input
+                type="number"
+                id="city"
+                value={this.state.editPersonData.city}
+                onChange={(e) => {
+                  let { editPersonData } = this.state;
+                  editPersonData.city = e.target.value;
+                  this.setState({ editPersonData });
+                }}
+              />
+            </FormGroup>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.updatePerson.bind(this)}>
+              Edit person
+            </Button>{" "}
+            <Button
+              color="secondary"
+              onClick={this.toggleEditPersonModal.bind(this)}
             >
               Cancel
             </Button>
