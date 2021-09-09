@@ -6,6 +6,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 import axios from "axios";
 
@@ -13,6 +16,18 @@ class App extends Component {
   state = {
     persons: [],
     newPersonModal: false,
+    newPersonData: {
+      id: "",
+      name: "",
+      surname: "",
+      city: "",
+    },
+    editPersonData: {
+      id: "",
+      name: "",
+      surname: "",
+      city: "",
+    },
   };
 
   componentWillMount() {
@@ -25,9 +40,28 @@ class App extends Component {
 
   toggleNewPersonModal() {
     this.setState({
-      newPersonModal: true,
+      newPersonModal: !this.state.newPersonModal,
     });
     //this.state.newPersonModal = true;
+  }
+
+  addPerson() {
+    axios
+      .post("https://localhost:44359/api/person", this.state.newPersonData)
+      .then((response) => {
+        let { persons } = this.state;
+        persons.push(response.data);
+        this.setState({
+          persons,
+          newPersonModal: false,
+          newPersonData: {
+            id: "",
+            name: "",
+            surname: "",
+            city: "",
+          },
+        });
+      });
   }
 
   render() {
@@ -39,10 +73,20 @@ class App extends Component {
           <td>{person.Surname}</td>
           <td>{person.City}</td>
           <td>
-            <Button color="success" size="sm" className="mr-2">
+            <Button
+              color="success"
+              size="sm"
+              onClick={this.editPerson.bind(
+                this,
+                person.id,
+                person.name,
+                person.surname,
+                person.city
+              )}
+            >
               Edit
             </Button>
-            <Button color="danger" size="sm">
+            <Button color="danger" size="sm" className="pl-2">
               Delete
             </Button>
           </td>
@@ -51,8 +95,13 @@ class App extends Component {
     });
 
     return (
-      <div className="App">
-        <Button color="primary" onClick={this.toggleNewPersonModal.bind(this)}>
+      <div className="App container">
+        <h1>Persons App</h1>
+        <Button
+          className="my-3"
+          color="primary"
+          onClick={this.toggleNewPersonModal.bind(this)}
+        >
           Add Person
         </Button>
         <Modal
@@ -60,23 +109,65 @@ class App extends Component {
           toggle={this.toggleNewPersonModal.bind(this)}
         >
           <ModalHeader toggle={this.toggleNewPersonModal.bind(this)}>
-            Modal title
+            Add new person
           </ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            <FormGroup>
+              <Label for="id">Id</Label>
+              <Input
+                type="number"
+                id="id"
+                value={this.state.newPersonData.id}
+                onChange={(e) => {
+                  let { newPersonData } = this.state;
+                  newPersonData.id = e.target.value;
+                  this.setState({ newPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                value={this.state.newPersonData.name}
+                onChange={(e) => {
+                  let { newPersonData } = this.state;
+                  newPersonData.name = e.target.value;
+                  this.setState({ newPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="surname">Surname</Label>
+              <Input
+                type="text"
+                id="surname"
+                value={this.state.newPersonData.surname}
+                onChange={(e) => {
+                  let { newPersonData } = this.state;
+                  newPersonData.surname = e.target.value;
+                  this.setState({ newPersonData });
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="city">Post Number</Label>
+              <Input
+                type="number"
+                id="city"
+                value={this.state.newPersonData.city}
+                onChange={(e) => {
+                  let { newPersonData } = this.state;
+                  newPersonData.city = e.target.value;
+                  this.setState({ newPersonData });
+                }}
+              />
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button
-              color="primary"
-              onClick={this.toggleNewPersonModal.bind(this)}
-            >
-              Do Something
+            <Button color="primary" onClick={this.addPerson.bind(this)}>
+              Add person
             </Button>{" "}
             <Button
               color="secondary"

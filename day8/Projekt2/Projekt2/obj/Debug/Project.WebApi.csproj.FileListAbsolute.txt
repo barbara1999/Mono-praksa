@@ -234,3 +234,6 @@ C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\Project.Repository.Comm
 C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\obj\Debug\Project.WebApi.csproj.CopyComplete
 C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\Project.Common.dll
 C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\Project.Common.pdb
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\System.Web.Cors.dll
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\System.Web.Http.Cors.dll
+C:\Users\WIN10\Desktop\praksa\day8\Projekt2\Projekt2\bin\System.Web.Http.Cors.xml

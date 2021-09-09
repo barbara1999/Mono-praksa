@@ -13,13 +13,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Project.Common;
-
-
+using System.Web.Http.Cors;
 
 namespace Projekt2.Controllers
 {
-    
-    
+
+    [EnableCors(origins: "http://localhost:3001", headers: "*", methods: "*")]
     [RoutePrefix("api")]
     public class PersonController : ApiController
     {
