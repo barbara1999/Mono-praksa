@@ -86,25 +86,6 @@ namespace Projekt2.Controllers
         [Route("person/{id}")]
         public async Task<HttpResponseMessage> UpdatePersonAsync(int id, [FromBody] PersonRest person)
         {
-            /* rjesiti kad budes znala
-             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Person",connection);
-
-             dataAdapter.UpdateCommand = new SqlCommand($"UPDATE Person SET City={cityId} WHERE ID={id}", connection);
-
-             dataAdapter.UpdateCommand.Parameters.Add("@cityID", SqlDbType.Int, 10, "City");
-             dataAdapter.UpdateCommand.Parameters.Add("@id", SqlDbType.Int, 10, "ID");
-
-             DataTable personTabel = new DataTable();
-             dataAdapter.Fill(personTabel);
-             dataAdapter.Update(personTabel);
-
-             DataRow row = personTabel.Rows[0];
-
-             Person person = new Person(id,row[1].ToString(),row[2].ToString(),cityId);
-
-             return Request.CreateResponse(HttpStatusCode.OK, person);
-
-             */
             Person personDomain = ConvertFromRestToDomain(person);
             bool result=await _personService.UpdatePersonAsync(id, personDomain);
 

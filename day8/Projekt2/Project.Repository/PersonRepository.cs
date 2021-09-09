@@ -25,7 +25,7 @@ namespace Project.Repository
         public async Task<List<IPerson>> GetAllPersonAsync(Sorter sorter, Pager pager, PersonFilter filter)
         {
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Person"+sorter.SQLMethod()+filter.SQlMethod()+pager.getSQL(), _connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM Person", _connection);
             await _connection.OpenAsync();
             SqlDataReader reader = await command.ExecuteReaderAsync();
             List<IPerson> people = new List<IPerson>();
@@ -124,7 +124,7 @@ namespace Project.Repository
             {
                 return false;
             }
-
+            reader.Close();
             SqlCommand command = new SqlCommand($"UPDATE Person SET City={person.City}, Name='{person.Name}', Surname='{person.Surname}' WHERE ID={id}", _connection);
             await command.ExecuteNonQueryAsync();
             _connection.Close();
